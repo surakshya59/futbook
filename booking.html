@@ -6,66 +6,191 @@
     <title>Book Futsal</title>
     <link rel="stylesheet" href="style.css" />
     <style>
+      /* Basic Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
         font-family: Arial, sans-serif;
         background-color: #f0f0f0;
         color: #333;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
       }
+
+      /* Header */
+      header {
+        background-color: #3d3d9f;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      /* Navigation */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #424978;
+        padding: 10px 20px;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+
+      nav ul li {
+        margin-right: 20px;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      /* Main container for the form */
       .container {
-        max-width: 800px;
-        margin: 50px auto;
+        max-width: 500px;
+        margin: 100px auto;
         background-color: white;
-        padding: 30px;
+        padding: 40px;
         border-radius: 10px;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        flex: 1;
       }
-      table {
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+      }
+
+      label {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      input,
+      select {
         width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-      }
-      table, th, td {
-        border: 1px solid #ccc;
-      }
-      th, td {
         padding: 10px;
-        text-align: left;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
       }
-      th {
+
+      input[type="submit"] {
         background-color: #0044cc;
         color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #003399;
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #3d3d9f;
+        color: white;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 600px) {
+        .container {
+          padding: 20px;
+        }
       }
     </style>
   </head>
   <body>
+    <!-- Header -->
+    <header>Futbook</header>
+
+    <!-- Navigation -->
+    <nav>
+      <ul>
+        <li><a href="futbook.html">Home</a></li>
+      </ul>
+      <ul>
+        <li><a href="login.html">Logout</a></li>
+       
+      </ul>
+    </nav>
+
+    <!-- Main Content (Futsal Booking Form) -->
     <div class="container">
       <h2>Book Your Futsal</h2>
-      <form>
-        <label>Name:</label>
-        <input type="text" name="name" required><br><br>
-        <label>Mobile No.:</label>
-        <input type="number" name="number" required><br><br>
-        <label>Select Futsal:</label>
-        <select id="futsal" name="futsal">
-          <option value="1">Yala Futsal</option>
-          <option value="2">National Sports Centre</option>
-          <option value="3">Ballpark Futsal</option>
-          <option value="4">Yeti Futsal</option>
-        </select><br><br>
-        <label>Date:</label>
-        <input type="date" id="date" name="date"><br><br>
-        <label>Time: from</label>
-        <input type="time" id="time" name="time">
-        <label>to</label>
-        <input type="time" id="time" name="time"><br><br>
-        <label>Pay via:</label>
-        <select id="payment" name="payment">
-          <option value="1">Esewa</option>
-          <option value="2">Khalti</option>
-          <option value="3">Mobile Banking</option>
-        </select><br><br>
+      <form id="bookingForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+        <label for="number">Mobile No.:</label>
+        <input type="tel" id="number" name="number" placeholder="Enter your mobile number" pattern="[0-9]{10}" required>
+
+        <label for="futsal">Select Futsal:</label>
+        <select id="futsal" name="futsal" required>
+          <option value="" disabled selected>Select a futsal</option>
+          <option value="Yala Futsal">Yala Futsal</option>
+          <option value="National Sports Centre">National Sports Centre</option>
+          <option value="Ballpark Futsal">Ballpark Futsal</option>
+          <option value="Yeti Futsal">Yeti Futsal</option>
+        </select>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="start-time">Time (from):</label>
+        <input type="time" id="start-time" name="start-time" required>
+
+        <label for="end-time">Time (to):</label>
+        <input type="time" id="end-time" name="end-time" required>
+
+        <label for="payment">Pay via:</label>
+        <select id="payment" name="payment" required>
+          <option value="" disabled selected>Select payment method</option>
+          <option value="Esewa">Esewa</option>
+          <option value="Khalti">Khalti</option>
+          <option value="Mobile Banking">Mobile Banking</option>
+        </select>
+
         <input type="submit" value="Submit">
       </form>
     </div>
+
+    <!-- Footer -->
+    <footer>&copy; 2024 Futbook. All rights reserved.</footer>
+
+    <!-- JavaScript to handle form submission -->
+    <script>
+      document.getElementById("bookingForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+        // Simulate form submission (redirect or show a success message)
+        alert("Booking confirmed!");
+        window.location.href = "thankyou.html"; // Redirect to a thank you page after form submission
+      });
+    </script>
   </body>
 </html>
